@@ -45,6 +45,12 @@ public class EmployeeSearchSteps extends CommonMethods {
 
     @Then("user see employee information is displayed")
     public void user_see_employee_information_is_displayed() {
-        System.out.println("Info is displayed");
+        tearDown();
+    }
+
+    @When("user enters valid employee name")
+    public void user_enters_valid_employee_name() {
+        EmployeeListPage emp = new EmployeeListPage();
+        sendText(emp.employeeNameField, "Sohail");
     }
 }
