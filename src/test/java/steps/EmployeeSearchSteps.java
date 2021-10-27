@@ -45,7 +45,7 @@ public class EmployeeSearchSteps extends CommonMethods {
 
     @Then("user see employee information is displayed")
     public void user_see_employee_information_is_displayed() {
-        tearDown();
+        //tearDown();
     }
 
     @When("user enters valid employee name")
