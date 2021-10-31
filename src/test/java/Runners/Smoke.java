@@ -8,11 +8,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "steps",
-        dryRun = true,
+        dryRun = false,
         monochrome = true,
-        tags = "@datatable"
+        tags = "@error",
+        plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json"}
+        //pretty - prints all the steps in console
 )
 
-public class TestRunner {
+public class Smoke {
 
 }

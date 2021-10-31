@@ -7,7 +7,10 @@ import io.cucumber.java.en.When;
 import pages.AddEmployeePage;
 import pages.DashBoardPage;
 import utils.CommonMethods;
+import utils.Constants;
+import utils.ExcelReading;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +89,22 @@ public class AddEmployeeSteps extends CommonMethods {
             DashBoardPage dash = new DashBoardPage();
             click(dash.addEmployeeButton);
             Thread.sleep(1000);
+        }
+    }
+    @When("user adds multiple employees from excel file using {string} sheet and verify the added employee")
+    public void user_adds_multiple_employees_from_excel_file_using_sheet_and_verify_the_added_employee(String sheetName) {
+        List<Map<String, String>> newEmployees = ExcelReading.excelIntoListMap(Constants.TESTDATA_FILEPATH, sheetName);
+        DashBoardPage dash = new DashBoardPage();
+        AddEmployeePage add = new AddEmployeePage();
+
+        Iterator<Map<String, String>> it = newEmployees.iterator();
+        while(it.hasNext()) {
+            Map<String, String> mapNewEmp = it.next();
+            sendText(add.firstName, mapNewEmp.get("FirstName"));
+            sendText(add.middleName, mapNewEmp.get("MiddleName"));
+            sendText(add.lastName, mapNewEmp.get("LastName"));
+            click(add.saveBtn);
+            click(dash.addEmployeeButton);
         }
     }
 }

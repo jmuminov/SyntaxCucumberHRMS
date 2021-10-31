@@ -66,8 +66,10 @@ public class CommonMethods {
         getJSExecutor().executeScript("arguments[0].click;", element);
     }
 
-    public static void takeScreenshot(String fileName) {
+    public static byte[] takeScreenshot(String fileName) {
         TakesScreenshot ts = (TakesScreenshot) driver;
+
+        byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
         try {
@@ -75,6 +77,7 @@ public class CommonMethods {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return picBytes;
     }
 
     public static String getTimeStamp(String pattern) {
