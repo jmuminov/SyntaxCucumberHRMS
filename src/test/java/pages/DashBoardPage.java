@@ -18,6 +18,12 @@ public class DashBoardPage extends CommonMethods {
     public WebElement employeeListOption;
     @FindBy(xpath = "//*[@class = 'menu']/ul/li")
     public List<WebElement> dashboardTabs;
+    @FindBy(id = "menu_admin_viewAdminModule")
+    public WebElement adminOption;
+    @FindBy(id = "menu_admin_Job")
+    public WebElement jobDD;
+    @FindBy(id = "menu_admin_viewJobTitleList")
+    public WebElement jobTitle;
 
     public DashBoardPage() {
         PageFactory.initElements(driver, this);

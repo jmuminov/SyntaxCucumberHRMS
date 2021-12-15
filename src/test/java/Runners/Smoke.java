@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue = "steps",
         dryRun = false,
         monochrome = true,
-        tags = "@error",
+        tags = "@hw",
         plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json", "rerun:target/failed.txt"}
         //pretty - prints all the steps in console
 )

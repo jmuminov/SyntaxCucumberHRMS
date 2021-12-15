@@ -56,3 +56,12 @@ Feature: Add Employee
   @excel
   Scenario: Adding an employee from excel file
     When user adds multiple employees from excel file using "EmployeeData" sheet and verify the added employee
+
+  @db
+  Scenario: Adding employee and validating in DataBase
+    When user enters "Jamoliddin" "Zellow" and "Muminov"
+    And captures employee id
+    And user clicks on save button
+    And employee is added successfully
+    Then query database and get data
+    And verify employee data is matched in ui and db

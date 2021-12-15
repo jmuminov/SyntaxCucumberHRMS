@@ -4,11 +4,13 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import pages.AddEmployeePage;
 import pages.DashBoardPage;
 import utils.CommonMethods;
 import utils.Constants;
 import utils.ExcelReading;
+import utils.GlobalVariables;
 
 import java.util.Iterator;
 import java.util.List;
@@ -60,6 +62,9 @@ public class AddEmployeeSteps extends CommonMethods {
     }
     @When("user enters {string} {string} and {string}")
     public void user_enters_and(String firstName, String middleName, String lastName) {
+        GlobalVariables.firstName = firstName;
+        GlobalVariables.middleName = middleName;
+        GlobalVariables.lastName = lastName;
         AddEmployeePage aep = new AddEmployeePage();
         sendText(aep.firstName, firstName);
         sendText(aep.middleName, middleName);
@@ -107,4 +112,18 @@ public class AddEmployeeSteps extends CommonMethods {
             click(dash.addEmployeeButton);
         }
     }
+
+    @When("captures employee id")
+    public void captures_employee_id() {
+        AddEmployeePage emp = new AddEmployeePage();
+        GlobalVariables.empId = emp.employeeID.getText();
+    }
+
+    @Then("verify employee data is matched in ui and db")
+    public void verify_employee_data_is_matched_in_ui_and_db() {
+        Assert.assertEquals(GlobalVariables.mapDataFromDb.get("emp_firstname"), GlobalVariables.firstName);
+        Assert.assertEquals(GlobalVariables.mapDataFromDb.get("emp_middle_name"), GlobalVariables.middleName);
+        Assert.assertEquals(GlobalVariables.mapDataFromDb.get("emp_lastname"), GlobalVariables.lastName);
+    }
+
 }
