@@ -24,10 +24,16 @@ public class CommonMethods {
         ConfigReader.readProperties(Constants.CONFIGURATION_FILEPATH);
         switch (ConfigReader.getPropertyValue("browser")) {
             case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.setHeadless(true);
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                if (ConfigReader.getPropertyValue("headless").equals("true")) {
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.setHeadless(true);
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver(chromeOptions);
+                } else {
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                }
+
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
